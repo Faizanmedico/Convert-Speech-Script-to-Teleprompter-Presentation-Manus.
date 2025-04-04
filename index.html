@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teleprompter - AI Content Generation Tools Analysis</title>
+    <style>
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        .teleprompter-container {
+            width: 80%;
+            max-width: 800px;
+            padding: 20px;
+            font-size: 24px;
+            text-align: center;
+            overflow-y: auto;
+            max-height: 80vh;
+        }
+        .controls {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #555;
+        }
+        .speed-control {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="teleprompter-container" id="teleprompterText">
+        <p>AI Content Generation Tools Analysis</p>
+
+        <p>We will explore AI content generation tools from three perspectives.</p>
+
+        <p>First, we'll examine the market demand from the product perspective. Second, we'll analyze the market supply from the technical perspective. Finally, by synthesizing both the demand and supply situations, we'll deduce future trends, aiming to provide insights into the people, companies, and developments we should pay attention to in the future.</p>
+
+        <p>Let's begin with the first part: examining demand from the product perspective.</p>
+
+        <p>In 2024, AI-generated content has become increasingly prevalent across domestic and international social media platforms.</p>
+
+        <p>Pixverse's Venom transformation and Pika's squeeze-and-transform features have brought users entirely new visual experiences, with Pixverse alone achieving 690 million views on a single platform.</p>
+
+        <p>Remini's clay-style effects and Recraft's film-style aesthetics have satisfied users' artistic preferences, garnering 15 million views on Xiaohongshu.</p>
+
+        <p>Content featuring babies singing and cats dancing has catered to the psychology of proud parents and pet owners sharing their loved ones, triggering another wave of AIGC combined with UGC content storm on TikTok.</p>
+
+        <p>The ability to embrace deceased loved ones, something impossible in reality, has provided users with emotional solace.</p>
+
+        <p>Do people enjoy AI-generated content? The answer is self-evident. AI has effectively met users' content needs in terms of entertainment, aesthetics, satisfying their desire to show off, and providing psychological companionship.</p>
+
+        <p>So, which products and companies are behind these viral phenomena? We conducted a comparative analysis of over 20 most influential and actively used AIGC products in the market, primarily focusing on video and image domains.</p>
+
+        <p>In the video domain, we selected 10 domestic and international products and models for horizontal comparison, identifying several common characteristics among existing products.</p>
+
+        <p>We believe that current AI video generation products have reached comparable levels in artistic expression, particularly in stylized presentation of static scenes and realistic rendering, where model capabilities have generally improved.</p>
+
+        <p>More discussions now focus on the representation of dynamic scenes, such as models' semantic understanding of professional prompts, camera control, character consistency, and physical laws.</p>
+
+        <p>We also conducted in-depth experience testing and summarized their distinctive features. For instance, Keli and Runway currently stand out with the most comprehensive capabilities.</p>
+
+        <p>In terms of human representation, Jimeng AI excels at single-subject facial expression rendering.</p>
+
+        <p>Hailuo is particularly suited for motion shots in large scenes.</p>
+
+        <p>PixVerse's entertaining features are conducive to rapid viral spread.</p>
+
+        <p>Pika demonstrates superior understanding of complex instruction words.</p>
+
+        <p>Some major companies leverage their computational power and technical advantages to excel in various aspects of resolution, generation speed, and duration.</p>
+
+        <p>We've also noticed several new directions under exploration.</p>
+
+        <p>For example, Sora's introduction of "storyboard" features, and the frame completion functionality launched by Keli, Jimeng, Runway, Luma, and Vidu are all exploring ways to improve users' AI creation workflow experience.</p>
+
+        <p>In Meta's yet-to-be-released MovieGen, "audio-visual synchronous generation" is noteworthy, allowing users to generate contextually appropriate audio for target scenes using either text or video as input prompts.</p>
+
+        <p>We applied the same analytical logic to evaluate top-ranking models and products in the image domain based on artificial analysis, Similarweb, and Sensor Tower rankings.</p>
+
+        <p>Current AI image processing, whether AIGC or multimodal understanding and recognition, has successfully broken through the crucial 1K resolution threshold. For example, Flux.1, Imagen 3, Midjourney v6, and Stable Diffusion 3 all support mainstream 1024×1024 native image resolution (single generation) and can achieve 2x or higher pixel expansion through super-resolution technology, further enhancing image details.</p>
+
+        <p>Additionally, similar to the video domain, current image products have made significant progress in controlling lighting, contours, and image composition.</p>
+
+        <p>They can now assist in image generation, applying to scenarios such as artistic creation, daily entertainment, and game development.</p>
+
+        <p>For instance, Recraft can achieve relatively complex semantic understanding, Canvas has reached relatively mature application scenarios, and Meitu Xiuxiu leverages its first-mover advantage to achieve optimal human lighting effects.</p>
+
+        <p>During our practical functionality testing, we also discovered some new approaches in image generation. For example, domestic products have now mastered Chinese and English text generation, with the next step focusing on exploring "text layout" and more precise structural control.</p>
+
+        <p>Regarding new product features, Google Lab's Whisk supports users in uploading and combining "theme," "scene," and "style" images, shifting from traditional text prompt instructions toward style transfer between images. The concept of "Prompt less, Play more" is becoming another noteworthy trend in the image sector.</p>
+    </div>
+
+    <div class="controls">
+        <button id="startBtn">Start Scrolling</button>
+        <button id="pauseBtn" class="hidden">Pause</button>
+        <button id="resetBtn">Reset</button>
+    </div>
+    
+    <div class="speed-control">
+        <label for="speedSlider">Speed: </label>
+        <input type="range" id="speedSlider" min="1" max="10" value="3">
+        <span id="speedValue">3</span>
+    </div>
+
+    <script>
+        let scrollInterval;
+        let scrollSpeed = 3;
+        const teleprompterText = document.getElementById('teleprompterText');
+        const startBtn = document.getElementById('startBtn');
+        const pauseBtn = document.getElementById('pauseBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const speedSlider = document.getElementById('speedSlider');
+        const speedValue = document.getElementById('speedValue');
+
+        startBtn.addEventListener('click', () => {
+            startScrolling();
+            startBtn.classList.add('hidden');
+            pauseBtn.classList.remove('hidden');
+        });
+
+        pauseBtn.addEventListener('click', () => {
+            clearInterval(scrollInterval);
+            pauseBtn.classList.add('hidden');
+            startBtn.classList.remove('hidden');
+        });
+
+        resetBtn.addEventListener('click', () => {
+            clearInterval(scrollInterval);
+            teleprompterText.scrollTop = 0;
+            pauseBtn.classList.add('hidden');
+            startBtn.classList.remove('hidden');
+        });
+
+        speedSlider.addEventListener('input', () => {
+            scrollSpeed = parseInt(speedSlider.value);
+            speedValue.textContent = scrollSpeed;
+            
+            if (pauseBtn.classList.contains('hidden') === false) {
+                clearInterval(scrollInterval);
+                startScrolling();
+            }
+        });
+
+        function startScrolling() {
+            scrollInterval = setInterval(() => {
+                teleprompterText.scrollTop += scrollSpeed;
+                
+                // If reached the bottom, stop scrolling
+                if (teleprompterText.scrollTop >= (teleprompterText.scrollHeight - teleprompterText.clientHeight)) {
+                    clearInterval(scrollInterval);
+                    pauseBtn.classList.add('hidden');
+                    startBtn.classList.remove('hidden');
+                }
+            }, 50);
+        }
+    </script>
+</body>
+</html>
